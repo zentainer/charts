@@ -1,0 +1,14 @@
+{{ if .Values.rbac.create }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ template "metacontroller.fullname" . }}
+subjects:
+- kind: ServiceAccount
+  name: {{ template "metacontroller.serviceAccountName" . }}
+  namespace: {{ .Release.Namespace }}
+roleRef:
+  kind: ClusterRole
+  name: {{ template "metacontroller.fullname" . }}
+  apiGroup: rbac.authorization.k8s.io
+{{ end }}

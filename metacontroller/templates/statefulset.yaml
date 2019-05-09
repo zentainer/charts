@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ template "metacontroller.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ template "metacontroller.fullname" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "metacontroller.fullname" . }}
+{{ include "metacontroller.labels" . | indent 6 }}
+  serviceName: ""
+  template:
+    metadata:
+      labels:
+        app: {{ template "metacontroller.fullname" . }}
+        chart: {{ template "metacontroller.chart" . }}
+        release: {{ .Release.Name }}
+        heritage: {{ .Release.Service }}
+    spec:
+      serviceAccountName: {{ template "metacontroller.serviceAccountName" . }}
+      containers:
+      - name: {{ template "metacontroller.fullname" . }}
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag}}
+        command: ["/usr/bin/metacontroller"]
+        args:
+        - --logtostderr
+        - -v=4
+        - --discovery-interval=20s
