@@ -72,3 +72,14 @@ You can only install one copy of this chart in a given Kubernetes cluster, due t
 ```console
 Error: release my-release failed: customresourcedefinitions.apiextensions.k8s.io "compositecontrollers.metacontroller.k8s.io" already exists
 ```
+
+## Upgrades
+If you get an error like this on upgrade, you'll need to add the `--force` flag to your upgrade command. This will re-install the chart with your new values, which will force the stateful set to be deleted+recreated instead of attempting to change read-only spec
+
+```console
+> helm upgrade metacontroller zentainer/metacontroller
+UPGRADE FAILED
+ROLLING BACK
+Error: StatefulSet.apps "metacontroller" is invalid: spec: Forbidden: updates to statefulset spec for fields other than 'replicas', 'template', and 'updateStrategy' are forbidden.
+Error: UPGRADE FAILED: StatefulSet.apps "metacontroller" is invalid: spec: Forbidden: updates to statefulset spec for fields other than 'replicas', 'template', and 'updateStrategy' are forbidden.
+```
