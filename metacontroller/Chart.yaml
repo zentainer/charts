@@ -1,8 +1,8 @@
 name: metacontroller
 apiVersion: v1
-appVersion: "v0.3.0"
+appVersion: "v0.4.0"
 description: A Helm chart for Metacontroller
-version: 1.0.1
+version: 1.1.0
 home: https://metacontroller.app/
 keywords:
 - CRDs

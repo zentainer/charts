@@ -48,7 +48,7 @@ The following table lists the configurable parameters of the metacontroller char
 Parameter | Description | Default
 --- | --- | ---
 `image.repository` | `metacontroller` image repository  | `metacontroller/metacontroller`
-`image.tag` | `metacontroller` image tag  | `v0.3.0`
+`image.tag` | `metacontroller` image tag  | `v0.4.0`
 `rbac.create` | Specifies whether RBAC resources should be created | `true`
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
