@@ -19,9 +19,6 @@ spec:
         app: {{ template "metacontroller.fullname" . }}-crd-cleanup
 {{ include "metacontroller.labels" . | indent 8 }}
     spec:
-    {{- if .Values.rbac.create }}
-      serviceAccountName: {{ template "metacontroller.serviceAccountName" . }}
-    {{- end }}
       containers:
         - name: kubectl
           image: "{{ .Values.hyperkubeImage.repository }}:{{ .Values.hyperkubeImage.tag }}"
